@@ -74,7 +74,7 @@
   width: 52px;
   height: 100%;
   border: none;
-  background: url("../images/search-bt.svg") no-repeat 50%;
+  background: url("../images/btn_search.svg") no-repeat 50%;
   background-color: transparent;
   font-size: 0;
   cursor: pointer;
