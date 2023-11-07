@@ -5,12 +5,12 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import "../styles/recommend.css";
+import "../styles/tour.css";
 import "../styles/common.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-function Recommend() {
+function Tour() {
   // js 코드 자리
   // JSX 의 요소를 React 에서 참조
   const swiperRef = useRef();
@@ -20,15 +20,15 @@ function Recommend() {
 
   const axiosGetData = () => {
     axios
-      .get("recommend.json")
+      .get("tour.json")
       .then(function (res) {
         console.log(res.data);
 
         const result = res.data;
         let arr = [];
         for (let i = 0; i < result.total; i++) {
-          const obj = result["good_" + (i + 1)];
-          arr[i] = obj;
+          const item = result["good_" + (i + 1)];
+          arr[i] = item;
         }
         console.log(arr);
         setHtmlTag(arr);
@@ -40,7 +40,7 @@ function Recommend() {
 
   // 외부 데이터 연동하기 (fetch 이용)
   // const getJsonData = () => {
-  //   fetch("recommend.json")
+  //   fetch("tour.json")
   //     .then((response) => {
   //       console.log("response : ", response);
   //       // 자료가 불러들여졌을 때
@@ -53,8 +53,8 @@ function Recommend() {
   //       // 자료가 바뀌면 화면을 변경하는 기능을 생성하겠다.
   //       let arr = [];
   //       for (let i = 0; i < result.total; i++) {
-  //         const obj = result["good_" + (i + 1)];
-  //         arr[i] = obj;
+  //         const item = result["good_" + (i + 1)];
+  //         arr[i] = item;
   //       }
   //       console.log(arr);
   //       setHtmlTag(arr);
@@ -82,40 +82,34 @@ function Recommend() {
   }, []);
 
   return (
-    <section className="recommend">
-      <div className="recommend-inner">
-        <div className="recommend-header">
-          <h2 className="recommend-title">쇼핑추천</h2>
-          <span className="recommend-txt">
-            할인이 쎄다! 지금, 특가 상품을 확인하세요.
-          </span>
+    <section className="tour">
+      <div className="tour-inner">
+        <div className="tour-header">
+          <h2 className="tour-title">투어특가</h2>
+          <span className="tour-txt">해외여행은 인터파크다</span>
         </div>
 
-        <div className="recommend-main">
-          <div className="recommend-cate">
-            <ul className="recommend-list">
+        <div className="tour-main">
+          <div className="tour-cate">
+            <ul className="tour-list">
               <li>
-                <button className="recommend-cate-bt recommend-cate-bt-active">
-                  쎈딜
+                <button className="tour-cate-bt tour-cate-bt-active">
+                  망설이면 품절
                 </button>
               </li>
               <li>
-                <button className="recommend-cate-bt">베스트</button>
+                <button className="tour-cate-bt">패키지</button>
               </li>
               <li>
-                <button className="recommend-cate-bt">블프데이</button>
+                <button className="tour-cate-bt">국내숙소</button>
               </li>
               <li>
-                <button className="recommend-cate-bt">디지털프라자</button>
-              </li>
-              <li>
-                <a href="#" className="recommend-cate-bt">
-                  소담상회
-                </a>
+                <button className="tour-cate-bt">해외숙소</button>
               </li>
             </ul>
           </div>
-          <div className="recommend-slide-wrap">
+
+          <div className="tour-slide-wrap">
             <Swiper
               slidesPerView={3}
               spaceBetween={27}
@@ -125,42 +119,42 @@ function Recommend() {
               }}
               modules={[Navigation]}
               navigation={{
-                nextEl: ".recommend-slide-wrap .slide-next-bt",
-                prevEl: ".recommend-slide-wrap .slide-prev-bt",
+                nextEl: ".tour-slide-wrap .slide-next-bt",
+                prevEl: ".tour-slide-wrap .slide-prev-bt",
               }}
-              className="recommend-slide"
+              className="tour-slide"
             >
               {htmlTag.map(function (item, index) {
                 return (
                   <SwiperSlide key={index}>
-                    {index === htmlTag.length - 1 ? (
-                      <a href={item.url}>바로가기</a>
-                    ) : (
-                      <div className="recommend-slide-item">
-                        <a href={item.url} className="recommend-link">
-                          <div className="recommend-img">
-                            <img src={item.image} alt={item.desc} />
-                          </div>
-                          <div className="recommend-info">
-                            <ul className="recommend-good-list">
-                              <li>
-                                <span className="recommend-good-info-price">
-                                  <b>
-                                    {item.discount ? item.discount + "%" : ""}{" "}
-                                  </b>
-                                  <em>{item.price}</em>원
-                                </span>
-                              </li>
-                              <li>
-                                <p className="recommend-good-info-desc">
-                                  {item.desc}
-                                </p>
-                              </li>
-                            </ul>
-                          </div>
-                        </a>
-                      </div>
-                    )}
+                    <div className="tour-slide-item">
+                      <a href={item.url} className="tour-link">
+                        <div className="tour-img">
+                          <img src={item.image} alt={item.desc} />
+                        </div>
+
+                        <div className="tour-info">
+                          <ul className="tour-good-list">
+                            <li>
+                              <span className="tour-good-badge">
+                                {item.badge}
+                              </span>
+                            </li>
+                            <li>
+                              <span className="tour-good-info-price">
+                                {item.sub}
+                                <em></em>
+                              </span>
+                            </li>
+                            <li>
+                              <p className="tour-good-info-desc">{item.desc}</p>
+                              <b className="tour-good-info-won">{item.price}</b>
+                              원~
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
                   </SwiperSlide>
                 );
               })}
@@ -175,9 +169,9 @@ function Recommend() {
           </div>
         </div>
 
-        <div className="recommend-footer"></div>
+        <div className="tour-footer"></div>
       </div>
     </section>
   );
 }
-export default Recommend;
+export default Tour;

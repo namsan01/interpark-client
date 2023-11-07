@@ -1,4 +1,4 @@
-import "../styles/header.css"
+import "../styles/header.css";
 function Header() {
   // javaScript 코드 자리
   return (
@@ -30,7 +30,7 @@ function Header() {
               <li>
                 <a href="#" id="mypage-bt" className="mypage-bt">
                   마이페이지
-                  <img src="./images/arrow.svg" alt="" />
+                  <img src="images/arrow.svg" alt="" />
                 </a>
               </li>
             </ul>
@@ -40,37 +40,37 @@ function Header() {
           <ul className="h-bottom-cate">
             <li>
               <a href="#">
-                <img src="./images/icon_tour.png" alt="" />
+                <img src="images/icon_tour.png" alt="" />
                 투어
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="./images/icon_ticket.png" alt="" />
+                <img src="images/icon_ticket.png" alt="" />
                 티켓
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="./images/icon_shopping.png" alt="" />
+                <img src="images/icon_shopping.png" alt="" />
                 쇼핑
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="./images/icon_book.png" alt="" />
+                <img src="images/icon_book.png" alt="" />
                 도서
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="./images/icon_triple.png" alt="" />
+                <img src="images/icon_triple.png" alt="" />
                 트리플
               </a>
             </li>
             <li>
               <a href="#" id="special-hot" className="special-hot">
-                <img src="./images/icon_special.png" alt="" />
+                <img src="images/icon_special.png" alt="" />
                 여행초특가
               </a>
             </li>
@@ -78,7 +78,7 @@ function Header() {
           <ul className="h-today-menu">
             <li className="event">
               <a href="#">
-                <img src="./images/icon_gnb_nol.png" alt="" />
+                <img src="images/icon_gnb_nol.png" alt="" />
                 항공 즉시할인
               </a>
             </li>

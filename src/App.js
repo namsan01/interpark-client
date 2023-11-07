@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Recommand from "./components/Recommend";
 import Visual from "./components/Visual";
+import Tour from "./components/Tour";
 
 function App() {
   // 안녕하세요. js 자리입니다.
@@ -13,6 +14,7 @@ function App() {
       <div className="main">
         <Visual />
         <Recommand />
+        <Tour />
       </div>
       {/* <!-- 하단 영역 --> */}
       <footer className="footer"></footer>
