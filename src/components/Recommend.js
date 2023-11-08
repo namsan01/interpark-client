@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { BtCate } from "../components/ui/buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation } from "swiper/modules";
@@ -9,8 +10,12 @@ import "../styles/recommend.css";
 import "../styles/common.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { InnerArea, SectionTag } from "./ui/layout";
 
 function Recommend() {
+  function numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   // js 코드 자리
   // JSX 의 요소를 React 에서 참조
   const swiperRef = useRef();
@@ -22,7 +27,7 @@ function Recommend() {
     axios
       .get("recommend.json")
       .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
 
         const result = res.data;
         let arr = [];
@@ -30,7 +35,7 @@ function Recommend() {
           const obj = result["good_" + (i + 1)];
           arr[i] = obj;
         }
-        console.log(arr);
+        // console.log(arr);
         setHtmlTag(arr);
       })
       .catch(function (error) {
@@ -82,8 +87,8 @@ function Recommend() {
   }, []);
 
   return (
-    <section className="recommend">
-      <div className="recommend-inner">
+    <SectionTag pt={0} pb={90}>
+      <InnerArea>
         <div className="recommend-header">
           <h2 className="recommend-title">쇼핑추천</h2>
           <span className="recommend-txt">
@@ -95,18 +100,16 @@ function Recommend() {
           <div className="recommend-cate">
             <ul className="recommend-list">
               <li>
-                <button className="recommend-cate-bt recommend-cate-bt-active">
-                  쎈딜
-                </button>
+                <BtCate active={true}>쎈딜</BtCate>
               </li>
               <li>
-                <button className="recommend-cate-bt">베스트</button>
+                <BtCate>베스트</BtCate>
               </li>
               <li>
-                <button className="recommend-cate-bt">블프데이</button>
+                <BtCate>블프데이</BtCate>
               </li>
               <li>
-                <button className="recommend-cate-bt">디지털프라자</button>
+                <BtCate>디지털프라자</BtCate>
               </li>
               <li>
                 <a href="#" className="recommend-cate-bt">
@@ -117,9 +120,9 @@ function Recommend() {
           </div>
           <div className="recommend-slide-wrap">
             <Swiper
-              slidesPerView={3}
+              slidesPerView={4}
               spaceBetween={27}
-              slidesPerGroup={3}
+              slidesPerGroup={4}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
@@ -148,7 +151,7 @@ function Recommend() {
                                   <b>
                                     {item.discount ? item.discount + "%" : ""}{" "}
                                   </b>
-                                  <em>{item.price}</em>원
+                                  <em>{numberWithCommas(item.price)}</em>원
                                 </span>
                               </li>
                               <li>
@@ -175,9 +178,13 @@ function Recommend() {
           </div>
         </div>
 
-        <div className="recommend-footer"></div>
-      </div>
-    </section>
+        <div class="recommend-footer">
+          <button class="recommend-ft-bt" href="#">
+            쇼핑 홈 바로가기
+          </button>
+        </div>
+      </InnerArea>
+    </SectionTag>
   );
 }
 export default Recommend;

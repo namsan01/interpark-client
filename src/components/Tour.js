@@ -11,6 +11,9 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 function Tour() {
+  function numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   // js 코드 자리
   // JSX 의 요소를 React 에서 참조
   const swiperRef = useRef();
@@ -22,7 +25,7 @@ function Tour() {
     axios
       .get("tour.json")
       .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
 
         const result = res.data;
         let arr = [];
@@ -30,7 +33,7 @@ function Tour() {
           const item = result["good_" + (i + 1)];
           arr[i] = item;
         }
-        console.log(arr);
+        // console.log(arr);
         setHtmlTag(arr);
       })
       .catch(function (error) {
@@ -148,7 +151,9 @@ function Tour() {
                             </li>
                             <li>
                               <p className="tour-good-info-desc">{item.desc}</p>
-                              <b className="tour-good-info-won">{item.price}</b>
+                              <b className="tour-good-info-won">
+                                {numberWithCommas(item.price)}
+                              </b>
                               원~
                             </li>
                           </ul>
@@ -169,7 +174,11 @@ function Tour() {
           </div>
         </div>
 
-        <div className="tour-footer"></div>
+        <div class="tour-footer">
+          <button class="tour-ft-bt" href="#">
+            투어 홈 바로가기
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -1,12 +1,13 @@
+import { BtSlidePrev, BtSlideNext } from "../components/ui/buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
 import "swiper/css";
-
 import "../styles/visual.css";
 import { useEffect, useRef, useState } from "react";
-// axios 모듈(js,파일) 가져오기
+// axios 모듈(js.파일) 가져오기
 import axios from "axios";
+import styled from "@emotion/styled";
+import { InnerArea, SectionTag } from "./ui/layout";
 
 function Visual() {
   // js 코드 자리
@@ -19,6 +20,7 @@ function Visual() {
     axios
       .get("visual.json")
       .then(function (res) {
+        // console.log(res.data);
         makeVisualSlide(res.data);
       })
       .catch(function (error) {
@@ -27,19 +29,18 @@ function Visual() {
   };
 
   // 외부 데이터 연동 ( fetch 활용)
-  // const fetchGetData = () => {
-  //   fetch("visual.json")
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       // console.log(result);
-  //       // 자료를 출력하자.
-  //       makeVisualSlide(result);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
+  const fetchGetData = () => {
+    fetch("visual.json")
+      .then((res) => res.json())
+      .then((result) => {
+        // console.log(result);
+        // 자료를 출력하자.
+        makeVisualSlide(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   // visual 슬라이드 내용 채우는 기능
   // 리액트용 변수 : 컴포넌트에 출력할 JSX
   //       일반변수 말고  리액트용 변수를 state 라고 합니다.
@@ -56,6 +57,7 @@ function Visual() {
       // console.log("visual_" + (i + 1));
       visualArray[i] = visualRes["visual_" + (i + 1)];
     }
+    console.log(visualArray);
     setVisualHtml(visualArray);
 
     // // 배열 자료(visualArray) 를 뜯어서 컴포넌트 담기
@@ -85,11 +87,23 @@ function Visual() {
     return () => {
       // 삭제될때 (Clean Up 함수)
     };
-  });
+  }, []);
+
+  const SlideItem = styled.div`
+    position: relative;
+    width: 628px;
+  `;
+  const SlideLink = styled.a`
+    position: relative;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    border-radius: 13px;
+  `;
 
   return (
-    <section className="visual">
-      <div className="visual-inner">
+    <SectionTag pt={30} pb={80}>
+      <InnerArea style={{ height: 345 }}>
         <Swiper
           slidesPerView={2}
           spaceBetween={24}
@@ -107,34 +121,32 @@ function Visual() {
           {visualHtml.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <div className="visual-slide-item">
-                  <a href={item.url}>
+                <SlideItem>
+                  <SlideLink href={item.url}>
                     <img
                       src={process.env.PUBLIC_URL + item.file}
                       alt={item.file}
                     />
-                  </a>
-                </div>
+                  </SlideLink>
+                </SlideItem>
               </SwiperSlide>
             );
           })}
         </Swiper>
 
-        <button
-          className="visual-slide-prev"
+        <BtSlidePrev
           onClick={() => {
             swiperRef.current.slidePrev();
           }}
-        ></button>
+        ></BtSlidePrev>
 
-        <button
-          className="visual-slide-next"
+        <BtSlideNext
           onClick={() => {
             swiperRef.current.slideNext();
           }}
-        ></button>
-      </div>
-    </section>
+        ></BtSlideNext>
+      </InnerArea>
+    </SectionTag>
   );
 }
 export default Visual;
