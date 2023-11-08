@@ -86,7 +86,7 @@ function Live() {
 
   return (
     <section class="live">
-      <div class="live=inner">
+      <div class="live-inner">
         <div class="live-header">
           <h2 class="live-title">
             <img src="images/title_live.svg" alt="" />
