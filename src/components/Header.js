@@ -1,6 +1,8 @@
+import { HeaderTopLeft } from "../styled/header";
 import "../styles/header.css";
 function Header() {
   // javaScript 코드 자리
+
   return (
     // html 코드 자리
     // <!-- 상단 영역 -->
@@ -8,7 +10,7 @@ function Header() {
       {/* <!-- 레이아웃 영역 : div --> */}
       <div className="h-inner">
         <div className="h-top">
-          <div className="h-top-left">
+          <HeaderTopLeft w="625" h="90">
             <a href="index.html" className="logo"></a>
             {/* <!-- 검색은 div 하나 주자 --> */}
             <div className="h-search">
@@ -18,7 +20,7 @@ function Header() {
                 <input type="button" value="검색" className="search-bt" />
               </form>
             </div>
-          </div>
+          </HeaderTopLeft>
           <div className="h-top-right">
             <ul className="mymenu">
               <li>
